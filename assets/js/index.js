@@ -16,24 +16,19 @@ function getUserInfo() {
     $.ajax({
         url: '/my/userinfo',
         method: 'GET',
-        headers:{
-            Authorization: localStorage.getItem('token') ||''
-        },
         success: function (res) {
             if(res.status != 0){
-
                 return layer.msg('获取身份失败');  
-            }
-                
+            } 
+            // console.log(res.data)             
             renderAvator(res.data);
-            console.log(res);
         }
     })
 }
 
 //渲染用户的图像
 function renderAvator(user){
-    var name = user.username || user.nickname;
+    var name = user.nickname||user.username;
     // console.log(name);
     $('#welcome').html(`欢迎你 ${name}`);
     //按需渲染用户的图像

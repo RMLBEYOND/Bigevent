@@ -2,9 +2,11 @@
 $.ajaxPrefilter(function (options) {
     options.url = 'http://www.liulongbin.top:3007' + options.url;
     
-    options.heads = {
-        Authorization: localStorage.getItem('token') ||''
-    }
+    if (options.url.indexOf('/my/') !== -1) {
+        options.headers = {
+          Authorization: localStorage.getItem('token') || ''
+        }
+      }
 
     //全局统一挂载complete函数
     options.complete = function(res){
